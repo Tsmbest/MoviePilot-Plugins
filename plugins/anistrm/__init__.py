@@ -179,7 +179,7 @@ class ANiStrm(_PluginBase):
             new_file_name = re.sub(r'\[.*?\]', '', file_name)
             new_file_path = os.path.join(self._storageplace, f'{new_file_name}.strm')
             os.rename(file_path, new_file_path)
-                return True
+            return True
         except Exception as e:
             logger.error('创建strm源文件失败：' + str(e))
             return False
