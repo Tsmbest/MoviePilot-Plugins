@@ -1,4 +1,5 @@
 import os
+import re
 import time
 from datetime import datetime, timedelta
 
@@ -174,6 +175,10 @@ class ANiStrm(_PluginBase):
             with open(file_path, 'w') as file:
                 file.write(src_url)
                 logger.debug(f'创建 {file_name}.strm 文件成功')
+              # 移除文件名中的[]符号及其内容
+            new_file_name = re.sub(r'\[.*?\]', '', file_name)
+            new_file_path = os.path.join(self._storageplace, f'{new_file_name}.strm')
+            os.rename(file_path, new_file_path)
                 return True
         except Exception as e:
             logger.error('创建strm源文件失败：' + str(e))
