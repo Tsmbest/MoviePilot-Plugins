@@ -155,10 +155,14 @@ class ANiStrm(_PluginBase):
             rss_info = {}
             # 标题
             title = DomUtils.tag_value(item, "title", default="")
+            # 去除【】及其内的内容
+            cleaned_title = re.sub(r'\【.*?\】', '', title) 
             # 链接
             link = DomUtils.tag_value(item, "link", default="")
-            rss_info['title'] = title
-            rss_info['link'] = link
+            # 将 "resources.ani.rip" 替换为 "aniopen.an-i.workers.dev"
+            cleaned_link = link.replace("resources.ani.rip", "aniopen.an-i.workers.dev")
+            rss_info['title'] = cleaned_title
+            rss_info['link'] = cleaned_link
             ret_array.append(rss_info)
         return ret_array
 
